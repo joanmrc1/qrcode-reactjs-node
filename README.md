@@ -26,6 +26,12 @@ Rode o servidor com:
 nodemon src/server.js
 ```
 
+No navegador:
+
+```
+http://localhost:3000/
+```
+
 ## Interface do sistema
 
 ![screenshot](https://imgur.com/mG9RbxQ.png)
