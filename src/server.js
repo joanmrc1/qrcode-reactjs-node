@@ -26,13 +26,6 @@ io.on('connection', socket => {
     });
 });
 
-router.get('/qr', function () {
-    var code = qr.image('http://www.google.com', { type: 'png' });
-    res.type('png');
-    code.pipe(res);
-});
-
-
 server.listen(3000, () => {
     console.log('Server iniciado com sucesso!');
 });
