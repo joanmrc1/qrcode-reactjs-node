@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>QR Code</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <style>
+        img {
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form" class="form-group">
+        <label>Digite a informação a baixo</label><br>
+        <input class="form-control" name="info" placeholder="Ex. Manga: R$ 2,50"><br>
+        <button type="submit" class="btn btn-primary btn-block">Gerar</button>
+    </form>
+
+    <ul class="list-group" id="list"></ul>
+
+    <script>
+        let socket = io('http://localhost:3000');
+
+        $('#form').submit(event => {
+            event.preventDefault();
+
+            let info = $('input[name=info]').val();
+
+            socket.emit('sendInfo', info);
+            $('input[name=info]').val('');
+        });
+
+        socket.on('returnInfo', data => {
+            renderList(data.info, data.code);
+        });
+
+        function renderList(info, code) {
+            let listElement = document.querySelector('#list');
+            let liElement = document.createElement('li');
+            let imgElement = document.createElement('img');
+            imgElement.src = 'data:image/png;base64,' + _arrayBufferToBase64(code);
+            liElement.className = 'list-group-item';
+
+            let textNode = document.createTextNode(info);
+
+            liElement.appendChild(imgElement);
+            liElement.appendChild(textNode);
+            listElement.appendChild(liElement);
+        }
+
+        function _arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
+        }
+    </script>
+</body>
+
+</html>
