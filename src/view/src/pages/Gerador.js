@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+import QRInfo from '../components/QRInfo';
+import './Gerador.css';
+
 class Gerador extends Component {
     render() {
         return (
-            <h1>Feed</h1>
+            <section id="qr-list">
+                <QRInfo />
+            </section>
         )
     }
 }

@@ -1,0 +1,24 @@
+header#main-header {
+  background: #fff;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+}
+
+header#main-header .header-content {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#new-qr {
+  display: flex;
+}
+#new-qr input{
+  margin-right: 10px;
+}
