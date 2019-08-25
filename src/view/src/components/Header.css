@@ -18,7 +18,9 @@ header#main-header .header-content {
 
 #new-qr {
   display: flex;
+  align-items: center;
 }
+
 #new-qr input{
   margin-right: 10px;
 }
